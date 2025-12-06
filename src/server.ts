@@ -6,6 +6,7 @@ import app from "./app"
 import { authRoute } from "./modules/auth/auth.route"
 import { userRoute } from "./modules/user/user.route"
 import { vehiclesRoute } from "./modules/vehicles/vehicles.route"
+import { bookingsRoute } from "./modules/bookings/bookings.route"
 //body parse
 app.use(express.json())
 // database initialize
@@ -23,5 +24,7 @@ app.use('/api/v1/users',userRoute)
 app.use("/api/v1/auth",authRoute)
 //vehicles route
 app.use("/api/v1/vehicles",vehiclesRoute)
+//booking route
+app.use("/api/v1/bookings",bookingsRoute)
 
 
