@@ -11,7 +11,7 @@ const auth=(...roles: ('admin' | 'customer')[])=>{
         }
         const tokenNoBearer = token.split(" ")[1];
         // console.log({bearerCharaToken:tokenNoBearer });
-        const decode=jwt.verify(tokenNoBearer as string,secret)  as JwtPayload & { role: 'admin' | 'customer'; email: string };;
+        const decode=jwt.verify(tokenNoBearer as string,secret)  as JwtPayload & { role: 'admin' | 'customer'; email: string };
         // console.log({verifyToken:decode});
         const user=await pool.query(`
                 SELECT * FROM users WHERE email=$1
@@ -22,7 +22,10 @@ const auth=(...roles: ('admin' | 'customer')[])=>{
             }
             req.user=decode
              if (roles.length && !roles.includes(decode.role)) {
-             throw new Error("You are not authorized");
+              return res.status(403).json({
+              success: false,
+              message: "You are not authorized"
+                });
              }
            next();
     }

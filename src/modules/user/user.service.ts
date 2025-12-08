@@ -2,7 +2,7 @@ import { pool } from "../../database/db"
 
 const getAllUsers=async(role:string)=>{
         if (role !== "admin") {
-          throw new Error("Not allowed!");
+          throw new Error("Not Allowed")
         }
         const result= await pool.query(`
           SELECT * FROM users

@@ -4,10 +4,10 @@ import { CreateBooking } from "../../interface/booking.interface";
 
 
 
- const createBooking = async (payload:CreateBooking) => {
+ const createBooking = async (payload:CreateBooking,role:string) => {
   const { customer_id, vehicle_id, rent_start_date, rent_end_date } = payload;
- 
-    // Check vehicle
+  if(role === 'admin' || role === 'customer'){
+             // Check vehicle
     const getVehicle = await pool.query(
       "SELECT id, vehicle_name, daily_rent_price, availability_status FROM vehicles WHERE id=$1 FOR UPDATE",
       [vehicle_id]
@@ -45,7 +45,9 @@ import { CreateBooking } from "../../interface/booking.interface";
         daily_rent_price: parseFloat(vehicle.daily_rent_price)
       }
     };
-
+  }
+   
+ 
 };
 const getAllBooking=async()=>{
   const result=await pool.query(`
