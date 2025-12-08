@@ -17,12 +17,15 @@ const createBooking=async(req:Request,res:Response)=>{
   }
 }
 const getAllBooking=async(req:Request,res:Response)=>{
+
   try {
-     const result=await bookingService.getAllBooking();
+   const role=req.user!.role;
+   const userId=req.user!.id
+     const result=await bookingService.getAllBooking(role,userId);
      res.status(200).json({
       success:true,
       message:"Bookings retrieved successfully",
-      data:result.rows
+      data:result
      })
   } catch (error) {
      res.status(404).json({

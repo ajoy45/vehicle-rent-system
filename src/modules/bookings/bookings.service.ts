@@ -49,11 +49,21 @@ import { CreateBooking } from "../../interface/booking.interface";
    
  
 };
-const getAllBooking=async()=>{
-  const result=await pool.query(`
+const getAllBooking=async(role:string,userId:number)=>{
+  if(role==="admin"){
+     const result=await pool.query(`
         SELECT * FROM bookings
     `)
-    return result
+    return result.rows
+  }
+  if(role==="customer"){
+    const result=await pool.query(`
+       SELECT * FROM bookings WHERE customer_id=$1
+
+      `,[userId])
+      return result.rows
+  }
+  
 }
 
 export const bookingService={
