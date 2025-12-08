@@ -20,7 +20,9 @@ const getAllBooking=async(req:Request,res:Response)=>{
 
   try {
    const role=req.user!.role;
-   const userId=req.user!.id
+   const userId=req.user!.id;
+   // const vehicleId=req.vehicle!.id;
+   // console.log(vehicleId,userId);
      const result=await bookingService.getAllBooking(role,userId);
      res.status(200).json({
       success:true,

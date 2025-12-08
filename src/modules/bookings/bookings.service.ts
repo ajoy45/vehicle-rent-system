@@ -50,18 +50,55 @@ import { CreateBooking } from "../../interface/booking.interface";
  
 };
 const getAllBooking=async(role:string,userId:number)=>{
-  if(role==="admin"){
-     const result=await pool.query(`
-        SELECT * FROM bookings
-    `)
-    return result.rows
+    const result = await pool.query(`SELECT * FROM bookings`);
+    if(role==="admin"){
+     const bookings = await Promise.all(
+        result.rows.map(async book => {
+            const customerRes = await pool.query(
+                `SELECT name,email FROM users WHERE id=$1`,
+                [book.customer_id]
+            );
+            const customer = customerRes.rows[0];
+
+            const vehicleRes = await pool.query(
+                `SELECT vehicle_name, registration_number FROM vehicles WHERE id=$1`,
+                [book.vehicle_id]
+            );
+            const vehicle = vehicleRes.rows[0];
+
+            return {
+                ...book,
+                customer,
+                vehicle
+            };
+        })
+    );
+
+    return bookings;
+   
   }
+  
   if(role==="customer"){
     const result=await pool.query(`
        SELECT * FROM bookings WHERE customer_id=$1
 
       `,[userId])
-      return result.rows
+      const bookings = await Promise.all(
+        result.rows.map(async book => {
+            const vehicleRes = await pool.query(
+                `SELECT vehicle_name, registration_number,type FROM vehicles WHERE id=$1`,
+                [book.vehicle_id]
+            );
+            const vehicle = vehicleRes.rows[0];
+
+            return {
+                ...book,
+                vehicle
+            };
+        })
+    );
+
+    return bookings;
   }
   
 }
