@@ -47,7 +47,13 @@ import { CreateBooking } from "../../interface/booking.interface";
     };
 
 };
+const getAllBooking=async()=>{
+  const result=await pool.query(`
+        SELECT * FROM bookings
+    `)
+    return result
+}
 
 export const bookingService={
-    createBooking
+    createBooking,getAllBooking
 }

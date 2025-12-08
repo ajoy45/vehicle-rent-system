@@ -3,11 +3,12 @@ import { userService } from "./user.service";
 
 const getAllUser = async (req: Request, res: Response) => {
   try {
-    const result = await userService.getAllUsers();
+    
+    const result = await userService.getAllUsers(req.user!.role);       
     return res.status(200).json({
        success: true,
        message: "Users retrieved successfully",
-       data: result.rows,
+       data: result.rows
     });
   } catch (error: any) {
     return res.status(500).json({

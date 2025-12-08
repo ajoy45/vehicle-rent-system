@@ -1,10 +1,14 @@
 import { pool } from "../../database/db"
 
-const getAllUsers=async()=>{
-    const result= await pool.query(`
+const getAllUsers=async(role:string)=>{
+        if (role !== "admin") {
+          throw new Error("Not allowed!");
+        }
+        const result= await pool.query(`
           SELECT * FROM users
         `)
-        return result
+         return result
+
 }
 const updateUser=async(name:string,email:string,phone:string,role:string,id:number)=>{
     const result= await pool.query(`
