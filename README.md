@@ -12,11 +12,13 @@
 - Role-based access (admin, customer)
 - Booking creation, update, cancellation
 - Vehicle registration & management
-- Payment integration (placeholder)
+- User registration and signin
+- Get all user, delete and update user
+- Vehicles createVehicles,getAllVehicles,getSingleVehicle,updateVehicles,deleteVehicle
+- Booking createBooking,getAllBooking,updateBooking
 - JWT authentication & authorization
 
 ## Tech stack
-- Node.js + Express
+- Node.js + Express + typescript
 - PostgreSQL
 - JWT for auth
-- Docker (optional)
