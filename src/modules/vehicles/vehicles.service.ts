@@ -1,14 +1,17 @@
-import { NumericLiteral } from "typescript";
-import { pool } from "../../database/db"
 
-const createVehicles=async(payload:Record<string,unknown>)=>{
-    console.log(payload)
-    const{vehicle_name,type,registration_number,daily_rent_price,availability_status}=payload;
+import { pool } from "../../database/db"
+const createVehicles=async(payload:Record<string,unknown>,role:string)=>{
+    if(role !=="admin"){
+      throw new Error("you are not eligible")
+    } else{
+      const{vehicle_name,type,registration_number,daily_rent_price,availability_status}=payload;
     const result=await pool.query(`
        INSERT INTO vehicles(vehicle_name,type,registration_number,daily_rent_price,availability_status)VALUES($1,$2,$3,$4,$5) RETURNING id,vehicle_name,type,registration_number,daily_rent_price,availability_status
     `,[vehicle_name,type,registration_number,daily_rent_price,availability_status])
 
     return result;
+    }
+    
 }
 const getAllVehicles=async()=>{
     const result= await pool.query(`
@@ -22,8 +25,11 @@ const getSingleVehicles=async(id:number)=>{
         `,[id])
         return result
 }
-const updateVehicles=async(id:number,vehicle_name?:string,type?:string,registration_number?:string,daily_rent_price?:number,availability_status?:string)=>{
-      const oldData = await pool.query("SELECT * FROM vehicles WHERE id=$1",[id]);
+const updateVehicles=async(id:number,vehicle_name?:string,type?:string,registration_number?:string,daily_rent_price?:number,availability_status?:string,role?:string)=>{
+     if(role!=="admin"){
+          throw new Error("you are not admin")
+     } else{
+       const oldData = await pool.query("SELECT * FROM vehicles WHERE id=$1",[id]);
     const existsData=oldData.rows[0];
     const updateData={
         vehicle_name:vehicle_name??existsData.vehicle_name,
@@ -43,7 +49,8 @@ const updateVehicles=async(id:number,vehicle_name?:string,type?:string,registrat
       updateData.daily_rent_price,
       updateData.availability_status,
       id])
-    return result;
+       return result;
+     }
 }
 const deleteVehicle=async(id:number)=>{
     const result=await pool.query(`

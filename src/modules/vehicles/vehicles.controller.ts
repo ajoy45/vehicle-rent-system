@@ -3,7 +3,7 @@ import { vehiclesService } from "./vehicles.service";
 
 const createVehicles = async (req: Request, res: Response) => {
   try {
-    const result = await vehiclesService.createVehicles(req.body);
+    const result = await vehiclesService.createVehicles(req.body,req.user!.role);
     return res.status(201).json({
        success: true,
        message: "Vehicle created successfully",
@@ -62,10 +62,11 @@ const getSingleVehicle=async(req: Request, res: Response)=>{
 
  const updateVehicles=async(req:Request,res:Response)=>{
       const id=Number(req.params.vehicleId);
-      const{vehicle_name,type,registration_number,daily_rent_price,availability_status}=req.body
-   try {
+      const{vehicle_name,type,registration_number,daily_rent_price,availability_status}=req.body;
+      const role=req.user!.role;
+      try {
    
-      const result= await vehiclesService.updateVehicles(id,vehicle_name,type,registration_number,daily_rent_price,availability_status);
+      const result= await vehiclesService.updateVehicles(id,vehicle_name,type,registration_number,daily_rent_price,availability_status,role);
         if(result.rows.length===0){
              res.status(404).json({
              success:false,
@@ -84,6 +85,7 @@ const getSingleVehicle=async(req: Request, res: Response)=>{
          message:error.message
        })
    }
+   
  }
 
 
