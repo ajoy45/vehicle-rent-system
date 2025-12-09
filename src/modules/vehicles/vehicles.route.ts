@@ -8,6 +8,6 @@ import auth from "../../middleware/auth";
  route.get('/',vehiclesController.getAllVehicles)
  route.get('/:vehicleId',vehiclesController.getSingleVehicle)
  route.put('/:vehicleId',auth("admin"),vehiclesController.updateVehicles)
- route.delete('/:vehicleId',vehiclesController.deleteVehicle)
+ route.delete('/:vehicleId',auth("admin"),vehiclesController.deleteVehicle)
 
  export const vehiclesRoute=route

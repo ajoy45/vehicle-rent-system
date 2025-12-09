@@ -52,11 +52,16 @@ const updateVehicles=async(id:number,vehicle_name?:string,type?:string,registrat
        return result;
      }
 }
-const deleteVehicle=async(id:number)=>{
-    const result=await pool.query(`
+const deleteVehicle=async(id:number,role:string)=>{
+  if(role!=="admin"){
+     throw new Error("you ar not admin")
+  } else{
+        const result=await pool.query(`
          DELETE FROM vehicles WHERE id=$1
         `,[id])
         return result;
+  }
+    
 }
 export const vehiclesService={
      createVehicles,getAllVehicles,getSingleVehicles,updateVehicles,deleteVehicle

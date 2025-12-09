@@ -91,8 +91,9 @@ const getSingleVehicle=async(req: Request, res: Response)=>{
 
  const deleteVehicle=async(req:Request,res:Response)=>{
      const id=Number(req.params.vehicleId);
+     const role=req.user!.role
    try {
-      const result= await vehiclesService.deleteVehicle(id);
+      const result= await vehiclesService.deleteVehicle(id,role);
         if(result.rowCount===0){
              res.status(404).json({
              success:false,

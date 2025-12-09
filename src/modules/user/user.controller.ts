@@ -44,9 +44,10 @@ const updateUser=async(req:Request,res:Response)=>{
 }
 const deleteUser=async(req:Request,res:Response)=>{
     const id=Number(req.params.userId);
+    const role=req.user!.role;
      
   try {
-     const result= await userService.deleteUser(id);
+     const result= await userService.deleteUser(id,role);
        if(result.rowCount===0){
             res.status(404).json({
             success:false,

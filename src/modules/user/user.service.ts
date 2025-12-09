@@ -16,11 +16,26 @@ const updateUser=async(name:string,email:string,phone:string,role:string,id:numb
         `,[name,email,phone,role,id])
         return result
 }
-const deleteUser=async(id:number)=>{
-    const result= await pool.query(`
+const deleteUser=async(id:number,role:string)=>{
+  if(role!=="admin"){
+    throw new Error("you are not admin")
+  } else{
+      
+        const activeBooking=await pool.query(`
+              SELECT id FROM bookings WHERE customer_id = $1 AND status = 'active'
+          `,[id])
+          if(activeBooking.rows[0].status==="active"){
+             throw new Error("you can not delete")
+          } else{
+           const result= await pool.query(`
           DELETE FROM users WHERE id=$1
-        `,[id])
-        return result
+           `,[id])
+            return result
+          }
+
+       
+  }
+    
 }
 export const userService={
     getAllUsers,updateUser,deleteUser
