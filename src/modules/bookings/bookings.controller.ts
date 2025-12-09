@@ -36,6 +36,35 @@ const getAllBooking=async(req:Request,res:Response)=>{
      })
   }
 }
+const updateBooking = async (req: Request, res: Response) => {
+  try {
+    const bookingId = Number(req.params.bookingId);
+    const { status } = req.body;
+    const role = req.user!.role ;
+    const userId = req.user!.id;
+
+    const result = await bookingService.updateBooking(
+      bookingId,
+      status,
+      role,
+      userId
+    );
+
+    res.status(200).json({
+      success: true,
+      message:
+        status === "cancelled"
+          ? "Booking cancelled successfully"
+          : "Booking marked as returned. Vehicle is now available",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
 export const bookingController={
-    createBooking,getAllBooking
+    createBooking,getAllBooking,updateBooking
 }

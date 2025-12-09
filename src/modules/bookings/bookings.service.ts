@@ -102,7 +102,82 @@ const getAllBooking=async(role:string,userId:number)=>{
   }
   
 }
+const updateBooking = async (
+  bookingId: number,
+  status: string,
+  role: string,
+  userId: number
+) => {
+ 
+  const existing = await pool.query(
+    `SELECT * FROM bookings WHERE id=$1`,
+    [bookingId]
+  );
+
+  if (existing.rows.length === 0) {
+    throw new Error("Booking not found");
+  }
+
+  const booking = existing.rows[0];
+
+  //  CUSTOMER Logic 
+  if (role === "customer") {
+    // customer can cancel only his own booking
+    if (booking.customer_id !== userId) {
+      throw new Error("You are not allowed to cancel this booking");
+    }
+
+    if (status !== "cancelled") {
+      throw new Error("Customers can only cancel bookings");
+    }
+
+    const updated = await pool.query(
+      `
+      UPDATE bookings 
+      SET status='cancelled'
+      WHERE id=$1
+      RETURNING *
+    `,
+      [bookingId]
+    );
+
+    return updated.rows[0];
+  }
+
+
+  if (role === "admin") {
+    if (status !== "returned") {
+      throw new Error("Admin can only mark booking as returned");
+    }
+
+    // Update booking to returned
+    const updatedBooking = await pool.query(
+      `
+      UPDATE bookings 
+      SET status='returned'
+      WHERE id=$1
+      RETURNING *
+    `,
+      [bookingId]
+    );
+
+    // Update vehicle availability
+    await pool.query(
+      `
+      UPDATE vehicles 
+      SET availability_status='available'
+      WHERE id=$1
+    `,
+      [booking.vehicle_id]
+    );
+
+    return {
+      ...updatedBooking.rows[0],
+      vehicle: { availability_status: "available" },
+    };
+  }
+};
 
 export const bookingService={
-    createBooking,getAllBooking
+    createBooking,getAllBooking,updateBooking 
 }

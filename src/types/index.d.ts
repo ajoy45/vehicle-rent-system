@@ -7,3 +7,10 @@ declare global {
     }
   }
 }
+declare global {
+  namespace Express {
+    interface Request {
+      vehicle?: JwtPayload & { role: 'admin' | 'customer'; email: string };
+    }
+  }
+}

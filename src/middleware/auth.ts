@@ -20,7 +20,8 @@ const auth=(...roles: ('admin' | 'customer')[])=>{
             if(user.rows.length===0){
                 throw new Error("User not found!")
             }
-            req.user=decode
+            req.user=decode;
+            req.vehicle = decode;
              if (roles.length && !roles.includes(decode.role)) {
               return res.status(403).json({
               success: false,
