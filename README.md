@@ -3,7 +3,7 @@
 
 **Short description:** A RESTful API to manage vehicles, bookings, users and admin operations for a vehicle rental system.
 
-**Live Demo:** https://your-live-url.example.com
+**Live Demo:** https://as-2-vrs.vercel.app/
 
 
 ---
