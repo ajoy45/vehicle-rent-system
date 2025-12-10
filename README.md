@@ -45,21 +45,15 @@ npm install
 yarn install
 
 ```
-### 4. Environment Variables
-```bash
-PORT=5000
-CONNECTION_STR=postgresql://neondb_owner:npg_1NjKFuWfZ2Og@ep-dry-sky-a8pesl25-pooler.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require
-
-```
-### 5. Start the Development Server
+### 4. Start the Development Server
 ```bash
 npm run dev
 ```
-### 6. Build for Production
+### 5. Build for Production
 ```bash
 npm run build
 ```
-### 7. API Usage
+### 6. API Usage
 ```bash
 Authentication
 POST	/api/v1/auth/signup	  Public
@@ -82,7 +76,7 @@ Vehicles
  GET	/api/v1/bookings	Role-based
  PUT	/api/v1/bookings/:bookingId	Role-based
 ```
-### 8.Required Headers:
+### 7.Required Headers:
 ```bash
 Bearer <jwt_token>
 admin:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IkpvaG4gRG9lMiIsImVtYWlsIjoiam9obi5kb2UyQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzY1MjA2MjAxLCJleHAiOjE3NjU4MTEwMDF9.XBMkv31aA2nB1NWlPhPW9iFQ4gmkvAWCLIKHPu_6zqg
