@@ -44,4 +44,10 @@ npm install
 # or
 yarn install
 
+```
+### 4. Environment Variables
+```bash
+PORT=5000
+CONNECTION_STR=postgresql://neondb_owner:npg_1NjKFuWfZ2Og@ep-dry-sky-a8pesl25-pooler.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require
+
 
