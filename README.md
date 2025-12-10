@@ -33,5 +33,11 @@ Ensure the following dependencies are installed on your system:
 ### 2. Clone the Repository
 
 ```bash
-git clone <your-repository-url>
+git clone <repository-url>
+cd <project-folder>
+
+### 2. Clone the Repository
+
+```bash
+git clone <repository-url>
 cd <project-folder>
