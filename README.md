@@ -22,3 +22,4 @@
 - Node.js + Express + typescript
 - PostgreSQL
 - JWT for auth
+## Setup & Usage Instructions
