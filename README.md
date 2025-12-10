@@ -30,3 +30,8 @@ Ensure the following dependencies are installed on your system:
 - **npm** or **yarn**
 - **PostgreSQL** 
 - **Git** (for version control)
+### 2. Clone the Repository
+
+```bash
+git clone <your-repository-url>
+cd <project-folder>
