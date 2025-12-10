@@ -31,9 +31,17 @@ Ensure the following dependencies are installed on your system:
 - **PostgreSQL** 
 - **Git** (for version control)
 ### 2. Clone the Repository
-
+ 
 ```bash
 git clone <repository-url>
 cd <project-folder>
-```md
-###  2. Clone the Repository
+
+
+ ```
+### 3. Install Dependencies
+```bash
+npm install
+# or
+yarn install
+
+
