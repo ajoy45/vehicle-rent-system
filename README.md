@@ -54,6 +54,23 @@ CONNECTION_STR=postgresql://neondb_owner:npg_1NjKFuWfZ2Og@ep-dry-sky-a8pesl25-po
 ### 5. Start the Development Server
 ```bash
 npm run dev
+```
+### 6. Build for Production
+```bash
+npm run build
+```
+### 7. API Usage
+```bash
+Example Request:
+GET /api/v1/users
+```
+### 8.Required Headers:
+```bash
+Bearer <jwt_token>
+admin:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IkpvaG4gRG9lMiIsImVtYWlsIjoiam9obi5kb2UyQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzY1MjA2MjAxLCJleHAiOjE3NjU4MTEwMDF9.XBMkv31aA2nB1NWlPhPW9iFQ4gmkvAWCLIKHPu_6zqg
+
+customer:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibmFtZSI6IkpvaG4gRG9lMyIsImVtYWlsIjoiam9objMuZG9lMkBleGFtcGxlLmNvbSIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc2NTIwNjI1MywiZXhwIjoxNzY1ODExMDUzfQ.tJIjyBgrWxw-ppV4wFXDvToGsAIEIBfJ9OrzM4uq1fo
+
 
 
 
