@@ -23,3 +23,10 @@
 - PostgreSQL
 - JWT for auth
 ## Setup & Usage Instructions
+### 1. Prerequisites
+Ensure the following dependencies are installed on your system:
+
+- **Node.js** (v18 or later)
+- **npm** or **yarn**
+- **PostgreSQL** 
+- **Git** (for version control)
