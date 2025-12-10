@@ -61,8 +61,26 @@ npm run build
 ```
 ### 7. API Usage
 ```bash
-Example Request:
-GET /api/v1/users
+Authentication
+POST	/api/v1/auth/signup	  Public
+POST	/api/v1/auth/signin	  Public
+
+Vehicles
+ POST	/api/v1/vehicles	Admin only
+ GET	/api/v1/vehicles	Public
+ GET	/api/v1/vehicles/:vehicleId	Public
+ PUT	/api/v1/vehicles/:vehicleId	 Admin only
+ DELETE	/api/v1/vehicles/:vehicleId	 Admin only
+
+ Users
+ GET	/api/v1/users	Admin only
+ PUT	/api/v1/users/:userId	Admin or Own
+ DELETE	/api/v1/users/:userId	Admin only
+
+ Bookings
+ POST	/api/v1/bookings	Customer or Admin
+ GET	/api/v1/bookings	Role-based
+ PUT	/api/v1/bookings/:bookingId	Role-based
 ```
 ### 8.Required Headers:
 ```bash
